@@ -8,7 +8,7 @@ output_dir=output
 
 gitversion=.gitversion
 control=./control.sh
-create_mysql_table=./docs/install_guide/create_mysql_table.sql
+create_mysql_table=./docs/install_guide/schema.sql
 app_config_file=./kafka-manager-web/src/main/resources/application.yml
 
 ## function

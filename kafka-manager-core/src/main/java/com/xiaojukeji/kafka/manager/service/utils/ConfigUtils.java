@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
  */
 @Service("configUtils")
 public class ConfigUtils {
-    @Value(value = "${custom.idc}")
+    @Value(value = "${custom.idc:}")
     private String idc;
 
-    @Value("${custom.jmx.max-conn}")
+    @Value("${custom.jmx.max-conn:10}")
     private Integer jmxMaxConn;
 
-    @Value(value = "${spring.profiles.active}")
+    @Value(value = "${spring.profiles.active:}")
     private String kafkaManagerEnv;
 
-    @Value(value = "${custom.store-metrics-task.save-days}")
+    @Value(value = "${custom.store-metrics-task.save-days:7}")
     private Integer maxMetricsSaveDays;
 
     public String getIdc() {

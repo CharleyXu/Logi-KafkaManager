@@ -4,13 +4,18 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.init.DataSourceInitializer;
+import org.springframework.jdbc.datasource.init.DatabasePopulator;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 import javax.sql.DataSource;
 
@@ -21,10 +26,29 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
     @Bean(name = "dataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.kafka-manager")
+    @ConfigurationProperties(prefix = "spring.datasource")
     @Primary
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();
+    }
+
+    @Value("classpath:schema.sql")
+    private Resource dataScript;
+
+    @Bean
+    public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
+        DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
+        dataSourceInitializer.setDataSource(dataSource);
+        dataSourceInitializer.setDatabasePopulator(databasePopulator());
+        return dataSourceInitializer;
+    }
+
+    private DatabasePopulator databasePopulator() {
+        System.out.println("==================sql脚本正在执行==================");
+        final ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+        populator.addScripts(dataScript);
+        System.out.println("==================sql脚本初始化完成==================");
+        return populator;
     }
 
     @Bean(name = "sqlSessionFactory")

@@ -21,11 +21,11 @@
 
 ## 环境初始化
 
-执行[create_mysql_table.sql](create_mysql_table.sql)中的SQL命令，从而创建所需的MySQL库及表，默认创建的库名是`kafka_manager`。
+执行[schema.sql](schema.sql)中的SQL命令，从而创建所需的MySQL库及表，默认创建的库名是`kafka_manager`。
 
 ```
 # 示例：
-mysql -uXXXX -pXXX -h XXX.XXX.XXX.XXX -PXXXX < ./create_mysql_table.sql
+mysql -uXXXX -pXXX -h XXX.XXX.XXX.XXX -PXXXX < ./schema.sql
 ```
 
 ---

@@ -42,7 +42,7 @@ public class WebMetricsInterceptor {
      */
     private static final Map<Integer, ApiCount> API_COUNT_MAP = new ConcurrentHashMap<>();
 
-    public WebMetricsInterceptor(@Value("${server.tomcat.max-threads}") int maxThreads) {
+    public WebMetricsInterceptor(@Value("${server.tomcat.max-threads:1000}") int maxThreads) {
         // 0级端口不限流
         API_COUNT_MAP.put(
                 ApiLevelContent.LEVEL_VIP_1,
