@@ -13,7 +13,6 @@ spring:
     driver-class-name: org.h2.Driver
     jdbc-url: jdbc:h2:file:./kafka-manager
     schema: ./schema.sql
-
   main:
     allow-bean-definition-overriding: true
   servlet:
@@ -38,10 +37,15 @@ custom:
       broker-metrics-enabled: true
       topic-metrics-enabled: true
     didi:
-      app-topic-metrics-enabled: true
-      topic-request-time-metrics-enabled: true
-      topic-throttled-metrics: true
+      app-topic-metrics-enabled: false
+      topic-request-time-metrics-enabled: false
+      topic-throttled-metrics: false
     save-days: 7
+
+# 任务相关的开关
+task:
+  op:
+    sync-topic-enabled: false # 未落盘的Topic定期同步到DB中
 
 account:
   ldap:

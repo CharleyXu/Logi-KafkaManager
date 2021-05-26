@@ -13,6 +13,9 @@
 
 将外部依赖mysql改为内存数据库h2
 
+### 快速体验
+- 体验地址 http://117.51.146.109:8080 账号密码 admin/admin
+
 ### 集群监控维度
 
 - 多版本集群管控，支持从`0.10.2`到`2.x`版本；
@@ -35,7 +38,7 @@
 
 ## kafka-manager架构图
 
-![kafka-manager-arch](./docs/assets/images/common/arch.png)
+![kafka-manager-arch](https://img-ys011.didistatic.com/static/dicloudpub/do1_xgDHNDLj2ChKxctSuf72)
 
 
 ## 相关文档
@@ -48,13 +51,17 @@
 ## 钉钉交流群
 
 ![dingding_group](./docs/assets/images/common/dingding_group.jpg)
+  钉钉群ID：32821440
+  
+## OCE认证
+OCE是一个认证机制和交流平台，为Logi-KafkaManager生产用户量身打造，我们会为OCE企业提供更好的技术支持，比如专属的技术沙龙、企业一对一的交流机会、专属的答疑群等，如果贵司Logi-KafkaManager上了生产，[快来加入吧](http://obsuite.didiyun.com/open/openAuth)
 
 
 ## 项目成员
 
 ### 内部核心人员
 
-`iceyuhui`、`liuyaguang`、`limengmonty`、`zhangliangmike`、`nullhuangyiming`、`zengqiao`、`eilenexuzhe`、`huangjiaweihjw`
+`iceyuhui`、`liuyaguang`、`limengmonty`、`zhangliangmike`、`nullhuangyiming`、`zengqiao`、`eilenexuzhe`、`huangjiaweihjw`、`zhaoyinrui`、`marzkonglingxu`、`joysunchao`
 
 
 ### 外部贡献者

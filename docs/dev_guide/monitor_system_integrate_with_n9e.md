@@ -7,7 +7,7 @@
 
 --- 
 
-# 夜莺监控集成
+# 监控系统集成——夜莺
 
 - `Kafka-Manager`通过将 监控的数据 以及 监控的规则 都提交给夜莺，然后依赖夜莺的监控系统从而实现监控告警功能。
 
@@ -22,10 +22,13 @@ monitor:
   n9e:
     nid: 2
     user-token: 123456
+    # 夜莺 mon监控服务 地址
     mon:
-      base-url: http://127.0.0.1:8032
-    sink:
       base-url: http://127.0.0.1:8006
+    # 夜莺 transfer上传服务 地址
+    sink:
+      base-url: http://127.0.0.1:8008
+    # 夜莺 rdb资源服务 地址
     rdb:
       base-url: http://127.0.0.1:80
 

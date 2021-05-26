@@ -30,14 +30,6 @@ public class ConfigUtils {
         this.idc = idc;
     }
 
-    public Integer getJmxMaxConn() {
-        return jmxMaxConn;
-    }
-
-    public void setJmxMaxConn(Integer jmxMaxConn) {
-        this.jmxMaxConn = jmxMaxConn;
-    }
-
     public String getKafkaManagerEnv() {
         return kafkaManagerEnv;
     }

@@ -3,6 +3,7 @@ package com.xiaojukeji.kafka.manager.web.converters;
 import com.xiaojukeji.kafka.manager.common.entity.ao.BrokerOverviewDTO;
 import com.xiaojukeji.kafka.manager.common.entity.ao.ClusterDetailDTO;
 import com.xiaojukeji.kafka.manager.common.entity.ao.cluster.ClusterBrokerStatus;
+import com.xiaojukeji.kafka.manager.common.entity.ao.cluster.ControllerPreferredCandidate;
 import com.xiaojukeji.kafka.manager.common.entity.ao.cluster.LogicalCluster;
 import com.xiaojukeji.kafka.manager.common.entity.ao.cluster.LogicalClusterMetrics;
 import com.xiaojukeji.kafka.manager.common.entity.dto.rd.ClusterDTO;
@@ -15,6 +16,7 @@ import com.xiaojukeji.kafka.manager.common.entity.vo.normal.cluster.TopicMetadat
 import com.xiaojukeji.kafka.manager.common.entity.vo.rd.KafkaControllerVO;
 import com.xiaojukeji.kafka.manager.common.entity.vo.rd.cluster.ClusterBrokerStatusVO;
 import com.xiaojukeji.kafka.manager.common.entity.vo.rd.cluster.ClusterDetailVO;
+import com.xiaojukeji.kafka.manager.common.entity.vo.rd.cluster.ControllerPreferredCandidateVO;
 import com.xiaojukeji.kafka.manager.common.entity.vo.rd.cluster.RdClusterMetricsVO;
 import com.xiaojukeji.kafka.manager.common.utils.CopyUtils;
 import com.xiaojukeji.kafka.manager.common.utils.ListUtils;
@@ -53,6 +55,7 @@ public class ClusterModelConverter {
         CopyUtils.copyProperties(vo, logicalCluster);
         vo.setClusterId(logicalCluster.getLogicalClusterId());
         vo.setClusterName(logicalCluster.getLogicalClusterName());
+        vo.setClusterIdentification(logicalCluster.getLogicalClusterIdentification());
         return vo;
     }
 
@@ -76,9 +79,8 @@ public class ClusterModelConverter {
         ClusterDO clusterDO = new ClusterDO();
         CopyUtils.copyProperties(clusterDO, reqObj);
         clusterDO.setId(reqObj.getClusterId());
-        clusterDO.setSecurityProperties(
-                ValidateUtils.isNull(clusterDO.getSecurityProperties())? "": clusterDO.getSecurityProperties()
-        );
+        clusterDO.setSecurityProperties(ValidateUtils.isNull(reqObj.getSecurityProperties())? "": reqObj.getSecurityProperties());
+        clusterDO.setJmxProperties(ValidateUtils.isNull(reqObj.getJmxProperties())? "": reqObj.getJmxProperties());
         return clusterDO;
     }
 
@@ -248,5 +250,22 @@ public class ClusterModelConverter {
         vo.setBrokerBytesInStatusList(clusterBrokerStatus.getBrokerBytesInStatusList());
         vo.setBrokerReplicaStatusList(clusterBrokerStatus.getBrokerReplicaStatusList());
         return vo;
+    }
+
+    public static List<ControllerPreferredCandidateVO> convert2ControllerPreferredCandidateVOList(List<ControllerPreferredCandidate> candidateList) {
+        if (ValidateUtils.isEmptyList(candidateList)) {
+            return new ArrayList<>();
+        }
+
+        List<ControllerPreferredCandidateVO> voList = new ArrayList<>();
+        for (ControllerPreferredCandidate candidate: candidateList) {
+            ControllerPreferredCandidateVO vo = new ControllerPreferredCandidateVO();
+            vo.setBrokerId(candidate.getBrokerId());
+            vo.setHost(candidate.getHost());
+            vo.setStatus(candidate.getStatus());
+            vo.setStartTime(candidate.getStartTime());
+            voList.add(vo);
+        }
+        return voList;
     }
 }
